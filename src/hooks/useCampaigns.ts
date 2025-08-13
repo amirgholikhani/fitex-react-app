@@ -8,7 +8,7 @@ export type Campaign = {
 
 export function useCampaigns(extraCampaigns: Campaign[]) {
   const { data, status, error } = useQuery<Campaign[]>(
-    "http://5c3db915a9d04f0014a98a79.mockapi.io/campaigns"
+    `${import.meta.env.VITE_API_URL}/campaigns`
   );
 
   // Ensure array and correct shape

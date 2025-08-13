@@ -13,7 +13,7 @@ type OverviewResponse = {
 
 export function useOverview() {
   const { data, status, error } = useQuery<OverviewResponse>(
-    "http://5c3db915a9d04f0014a98a79.mockapi.io/overview"
+    `${import.meta.env.VITE_API_URL}/overview`
   );
   // Merge installs + revenue by day
   const merged: OverviewPoint[] = Array.isArray(data?.installs)
