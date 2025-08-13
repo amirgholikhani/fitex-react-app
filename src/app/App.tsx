@@ -13,16 +13,16 @@ export default function App() {
             { to: "/", label: "Overview" },
             { to: "/campaigns", label: "Campaigns" },
             { to: "/create", label: "Create Campaign" },
-          ].map((l) => (
+          ].map((link) => (
             <NavLink
-              key={l.to}
-              to={l.to}
+              key={link.to}
+              to={link.to}
               className={({ isActive }) =>
                 `px-3 py-1 rounded-xl ${isActive ? "bg-gray-900 text-white" : "hover:bg-gray-200"}`
               }
               end
             >
-              {l.label}
+              {link.label}
             </NavLink>
           ))}
         </nav>
