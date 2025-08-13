@@ -3,16 +3,7 @@ import { useSearchParams } from "react-router";
 import { useCampaigns } from "@/hooks/useCampaigns";
 import { useCreatedCampaigns } from "@/store/createdCampaign";
 import { useCampaignSelection } from "@/store/campaignSelection";
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "recharts";
+import BarWeeklyChart from "@/components/charts/BarWeeklyChart.tsx";
 
 export default function CampaignsPage() {
   const [params, setParams] = useSearchParams();
@@ -63,28 +54,7 @@ export default function CampaignsPage() {
       {selected ? (
         <div className="bg-white p-4 rounded-xl shadow">
           <h2 className="text-lg font-medium mb-4">{selected.name}</h2>
-          <div className="w-full h-[300px]">
-            <ResponsiveContainer>
-              <LineChart
-                data={selected.installs.map((d) => ({
-                  day: d.day,
-                  installs: d.value,
-                }))}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="day" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="installs"
-                  stroke="#8884d8"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <BarWeeklyChart data={selected} />
         </div>
       ) : (
         <p>No campaign selected.</p>
