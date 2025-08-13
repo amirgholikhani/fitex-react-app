@@ -15,9 +15,9 @@ export default function BarWeeklyChart({ data }: { data: Campaign }) {
     <div className="w-full h-[300px]">
       <ResponsiveContainer>
         <LineChart
-          data={data.installs.map((d) => ({
-            day: d.day,
-            installs: d.value,
+          data={data.installs.map((item) => ({
+            day: item.day,
+            installs: item.value,
           }))}
         >
           <CartesianGrid strokeDasharray="3 3" />

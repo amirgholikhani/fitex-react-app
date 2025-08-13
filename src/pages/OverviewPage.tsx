@@ -4,8 +4,8 @@ import { useOverviewSettings } from "@/store/useOverviewSettings";
 
 export default function OverviewPage() {
   const { data, status, error } = useOverview();
-  const groupBy = useOverviewSettings((s) => s.groupBy);
-  const setGroupBy = useOverviewSettings((s) => s.setGroupBy);
+  const groupBy = useOverviewSettings((state) => state.groupBy);
+  const setGroupBy = useOverviewSettings((state) => state.setGroupBy);
 
   if (status === "loading") return <p>Loading…</p>;
   if (status === "error") return <p className="text-red-600">Error: {String(error)}</p>;

@@ -15,15 +15,15 @@ const DaysOfWeek = new Set([
 type FormValues = z.infer<typeof schema>;
 
 export default function CreateCampaignPage() {
-  const created = useCreatedCampaigns((s) => s.created);
-  const add = useCreatedCampaigns((s) => s.add);
+  const created = useCreatedCampaigns((state) => state.created);
+  const add = useCreatedCampaigns((state) => state.add);
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {}
   });
 
   function onSubmit(values: FormValues) {
-    const exists = created.some(c => c.name.trim().toLowerCase() === values.name.trim().toLowerCase());
+    const exists = created.some(campaign => campaign.name.trim().toLowerCase() === values.name.trim().toLowerCase());
     if (exists) { alert("Duplicate campaign name"); return; }
 
     const installsPerWeek = Array.from(DaysOfWeek, (day) => {

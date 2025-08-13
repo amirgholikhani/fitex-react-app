@@ -11,12 +11,12 @@ export const useCreatedCampaigns = create<CreatedCampaignsState>()(
   persist(
     (set, get) => ({
       created: [],
-      add: (c) => {
+      add: (newCampaign) => {
         const exists = get().created.some(
-          (x) => x.name.trim().toLowerCase() === c.name.trim().toLowerCase()
+          (campaign) => campaign.name.trim().toLowerCase() === newCampaign.name.trim().toLowerCase()
         );
         if (exists) return;
-        set((state) => ({ created: [...state.created, c] }));
+        set((state) => ({ created: [...state.created, newCampaign] }));
       },
     }),
     { name: "createdCampaigns" }

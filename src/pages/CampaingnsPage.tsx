@@ -8,24 +8,24 @@ import BarWeeklyChart from "@/components/charts/BarWeeklyChart.tsx";
 export default function CampaignsPage() {
   const [params, setParams] = useSearchParams();
 
-  const created = useCreatedCampaigns((s) => s.created);
+  const created = useCreatedCampaigns((state) => state.created);
   const { data, status, error } = useCampaigns(created);
 
-  const selectedCampaignId = useCampaignSelection((s) => s.selectedId);
-  const setSelectedCampaignId = useCampaignSelection((s) => s.setSelectedId);
+  const selectedCampaignId = useCampaignSelection((state) => state.selectedId);
+  const setSelectedCampaignId = useCampaignSelection((state) => state.setSelectedId);
 
   const selectedId =
     params.get("campaign") ?? selectedCampaignId ?? data?.[0]?.id ?? null;
 
   const selected = useMemo(
-    () => (data ?? []).find((c) => c.id === selectedId) ?? null,
+    () => (data ?? []).find((campaign) => campaign.id === selectedId) ?? null,
     [data, selectedId]
   );
 
   function onSelect(id: string) {
-    setParams((p) => {
-      p.set("campaign", id);
-      return p;
+    setParams((param) => {
+      param.set("campaign", id);
+      return param;
     });
     setSelectedCampaignId(id);
   }
@@ -43,9 +43,9 @@ export default function CampaignsPage() {
           value={selected?.id ?? ""}
           onChange={(e) => onSelect(e.target.value)}
         >
-          {(data ?? []).map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
+          {(data ?? []).map((campaign) => (
+            <option key={campaign.id} value={campaign.id}>
+              {campaign.name}
             </option>
           ))}
         </select>
