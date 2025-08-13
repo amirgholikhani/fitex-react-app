@@ -1,10 +1,11 @@
-import { useState } from "react";
 import { useOverview } from "@/hooks/useOverview";
 import StackedWeeklyChart, { type GroupType } from "@/components/charts/StackedWeeklyChart";
+import { useOverviewSettings } from "@/store/useOverviewSettings";
 
 export default function OverviewPage() {
   const { data, status, error } = useOverview();
-  const [groupBy, setGroupBy] = useState<GroupType>("both");
+  const groupBy = useOverviewSettings((s) => s.groupBy);
+  const setGroupBy = useOverviewSettings((s) => s.setGroupBy);
 
   if (status === "loading") return <p>Loading…</p>;
   if (status === "error") return <p className="text-red-600">Error: {String(error)}</p>;
